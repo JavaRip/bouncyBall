@@ -1,0 +1,16 @@
+body {
+    background-color: bisque;
+}
+
+#canvasContainter {
+    width: 30em;
+    margin: 0em auto;
+}
+
+canvas {
+    border: 1px solid black;
+}
+
+p {
+    display: inline-block;
+}
