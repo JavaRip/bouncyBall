@@ -3,7 +3,7 @@ const canvEl = document.querySelector("#ballZone");
 const c = canvEl.getContext("2d");
 const cWidth = canvEl.width;
 const cHeight = canvEl.height;
-const gravity = 1.1;
+const gravity = 1;
 
 //starting point for bouncy ball
 let ball = {
@@ -16,48 +16,23 @@ let ball = {
 };
 
 function update() {
-    //ball hits wall on the left
-    if (ball.x <= ball.radius) {
+    //ball hits wall on the left or right
+    if (ball.x <= ball.radius || ball.x >= cWidth - ball.radius) {
         ball.dx = -(ball.dx * ball.bounce);
     }
-    //ball hits the wall on the right
-    if (ball.x >= cWidth - ball.radius) {
-        ball.dx = -(ball.dx * ball.bounce);
-    }
-    //ball hits the wall on the top
-    if (ball.y <= ball.radius) {
+    //ball hits the wall on the top or bottom
+    if (ball.y <= ball.radius || ball.y >= cHeight - ball.radius) {
         ball.dy = -ball.dy * ball.bounce;
     }
-    //ball hits the wall on the bottom
-    if (ball.y >= cHeight - ball.radius) {
-        if (ball.dy > 1) {
-            ball.dy = -ball.dy * ball.bounce;
-            ball.y = cHeight;
-        } else {
-            ball.dy = 0;
-        }
-    }
-    //if ball is going down increase dy by gravity
-    if (ball.dy > 0) {
-        if (ball.dy < 1) {
-            ball.dy = 1;
-        }
-        ball.dy = ball.dy * gravity;
-    }
-    //if ball is going up decrease dy
-    if (ball.dy < 0) {
-        //if dy is effectively 0 change direction
-        if (ball.dy > -1) {
-            ball.dy += 1;
-        } else {
-            ball.dy = ball.dy / gravity;
-        }
-    }
-    //round ball velocity to avoid clipping through walls
-    ball.dx = Math.round(ball.dx * 100) / 100;
-    ball.dy = Math.round(ball.dy * 100) / 100;
+    //add gravity
+    ball.dy += gravity;
+    //add new trajectory
     ball.y += ball.dy;
     ball.x += ball.dx;
+    if (ball.y > cHeight - ball.radius) {
+        ball.y = cHeight - ball.radius;
+    }
+    console.log(cHeight);
     document.querySelector("#dx").innerText = "dx: " + ball.dx;
     document.querySelector("#dy").innerText = "dy: " + ball.dy;
     document.querySelector("#x").innerText = "x: " + ball.x;
