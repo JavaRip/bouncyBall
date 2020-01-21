@@ -16,7 +16,8 @@ let ball = {
     y: canvEl.height / 10, // ball starting position Y
     dx: 10, //direction in x axis
     dy: 10, //direction in y axis
-    bounce: 0.9
+    bounce: 0.9,
+    shadow: 8
 };
 
 function update() {
@@ -37,7 +38,10 @@ function update() {
         ball.y = cHeight - ball.radius;
     }
     draw();
+    shadow();
 }
+
+
 
 function draw() {
     c.beginPath();
@@ -46,7 +50,17 @@ function draw() {
     c.fill();
 }
 
-animate(); 
+//
+function shadow() {
+  c.beginPath();
+  c.arc(ball.x, canvEl.height, ball.shadow, 0, Math.PI * 2, false);
+  c.fillStyle = "black";
+  c.fill();
+};
+
+
+
+animate();
 
 function animate() {
     requestAnimationFrame(animate);
