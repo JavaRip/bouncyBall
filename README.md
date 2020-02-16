@@ -1,6 +1,4 @@
 # bouncyBall
-this was too hard I'm finding something else to do
+A simple bouncy ball that fits to your screen size.
 
-The hang time for the ball is way too long and I'm not sure how to make it rise and fall more sharply
-
-I think the equation I'm using to apply the gravity to the ball is the wrong curve or somethin
+Next I want to make it so you can add momentum to the ball
